@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="navbar bg-white/30 backdrop-blur-md border-b border-white/20 shadow-lg px-10">
+    <div class="navbar bg-white/30 backdrop-blur-md border-b border-white/20 shadow-lg px-10 absolute">
         <div class="flex-none">
             <a href="/" class="inline-block">
                 <img src="/images/logo/HoopLab_recortada.png" alt="Logo HoopLab" class="h-15">
@@ -32,7 +32,7 @@
                     <button class="btn btn-primary">Registrarse</button>
                 </li>
                 <li>
-                    <button class="btn btn-outline btn-primary">Iniciar sesión</button>
+                    <button class="btn btn-primary">Iniciar sesión</button>
                 </li>
             </ul>
         </div>
