@@ -8,7 +8,7 @@ import Header from '@/Components/Shared/Header.vue';
 <template>
     <Header class="top-0 left-0 w-full z-50" />
 
-    <main class="h-300">
+    <main>
         <slot />
     </main>
 
