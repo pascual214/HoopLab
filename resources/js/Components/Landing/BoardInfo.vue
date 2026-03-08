@@ -3,10 +3,10 @@
 </script>
 
 <template>
-    <div class="bg-gray-200 py-16 px-6 md:py-24 md:px-20 lg:px-40">
-        <div class="flex flex-col md:flex-row items-center max-w-7xl mx-auto">
-            <div class="flex flex-col gap-5 pt-3 md:pr-10 text-center md:text-left mb-10 md:mb-0">
-                <h1 class="text-3xl md:text-5xl font-bold leading-tight">Crea tus jugadas con la pizarra</h1>
+    <div class="bg-gray-200 min-h-screen py-16 px-6 md:px-20">
+        <div class="flex flex-col items-center max-w-5xl mx-auto md:flex-row">
+            <div class="flex flex-col gap-5 pt-3 text-center mb-10 md:text-left md:mb-0 md:pr-10">
+                <h1 class="text-3xl font-bold leading-tight md:text-5xl">Crea tus jugadas con la pizarra</h1>
                 <p class="text-gray-700 max-w-lg mx-auto md:mx-0">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus imperdiet sed id elementum. Quam vel aliquam sit vulputate.
                 </p>
@@ -19,7 +19,7 @@
                 />
             </div>
         </div>
-        <div class="flex flex-row gap-10 pt-20 justify-center">
+        <div class="flex flex-col items-center justify-center gap-10 pt-20 md:flex-row">
             <!-- Primera tarjeta -->
             <div class="card w-75 bg-base-100 card-md shadow-sm">
                 <div class="card-body">
