@@ -3,18 +3,17 @@
 </script>
 
 <template>
-
     <div class="w-full py-16 lg:pl-20 max-lg:text-center mx-2 lg:mx-auto flex flex-col lg:flex-row items-center justify-center gap-x-100 text-left bg-linear-to-b from-blue-700 to-[#000000] p-10 text-white">
         <div>
             <h1
-                class="text-4xl lg:text-[46px] lg:leading-15 font-semibold bg-linear-to-r from-white to-[#0004ff] text-transparent bg-clip-text">
-                Ready to try-out this app?
+                class="text-4xl lg:text-[48px] lg:leading-15 font-semibold bg-linear-to-r from-white to-[#0004ff] text-transparent bg-clip-text">
+                Aquí empieza tu mejor versión.
             </h1>
             <p class="bg-linear-to-r from-white to-[#CAABFF] text-transparent bg-clip-text text-lg">
-                Your next favourite tool is just one click away.
+                Lleva tus entrenamientos al siguiente nivel.
             </p>
         </div>
-        <button type="button" class="text-white bg-linear-to-br from-purple-400 to-blue-800 hover:bg-linear-to-bl focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 shrink-0">Crear cuenta</button>
+        <button type="button" class="text-white bg-linear-to-br from-purple-400 to-blue-800 hover:bg-linear-to-bl focus:ring-1 focus:outline-none focus:ring-white dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 shrink-0">Crear cuenta</button>
     </div>
 </template>
 
