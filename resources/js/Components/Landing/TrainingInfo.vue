@@ -5,8 +5,8 @@
 <template>
     <div class="flex flex-row bg-white justify-center items-center h-screen py-16">
         <div class="flex flex-col pr-10 max-w-100 mr-57">
-            <h1 class="text-3xl font-bold leading-tight md:text-4xl mb-5">Diseña los entrenamientos a tu gusto</h1>
-            <p class="text-gray-700 max-w-lg mx-auto md:mx-0">Accede a cientos de ejercicios de todo tipo y crea el entrenamiento que necesitas</p>
+            <h1 class="text-3xl font-bold leading-tight lg:text-4xl mb-5">Diseña los entrenamientos a tu gusto</h1>
+            <p class="text-gray-700 max-w-lg mx-auto lg:mx-0">Accede a cientos de ejercicios de todo tipo y crea el entrenamiento que necesitas</p>
 
             <!-- Primera tarjeta -->
             <div class="card w-130 bg-base-100 card-lg shadow-sm my-10">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <img src="/images/background/team practice.jpg" class="max-h-150 rounded-3xl hidden md:block" />
+        <img src="/images/background/team practice.jpg" class="max-h-150 rounded-3xl hidden lg:block" />
     </div>
 </template>
 

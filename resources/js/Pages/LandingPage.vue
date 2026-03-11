@@ -3,6 +3,7 @@ import FullLayout from '@/Layouts/FullLayout.vue';
 import Hero from '@/Components/Landing/Hero.vue';
 import BoardInfo from '@/Components/Landing/BoardInfo.vue';
 import TrainingInfo from '@/Components/Landing/TrainingInfo.vue';
+import AccessBottom from '@/Components/Landing/AccessBottom.vue';
 
 // Tu lógica aquí
 </script>
@@ -14,6 +15,8 @@ import TrainingInfo from '@/Components/Landing/TrainingInfo.vue';
         <BoardInfo />
 
         <TrainingInfo />
+
+        <AccessBottom />
     </FullLayout>
 </template>
 
