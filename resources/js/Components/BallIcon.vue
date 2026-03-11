@@ -41,12 +41,13 @@
 
 .animated-lines {
     stroke-width: 8px; 
-    animation: changeColor 2s infinite ease-in-out;
+    animation: changeColor 3s infinite ease-in-out;
 }
 
 @keyframes changeColor {
-    0%, 75% { stroke: #ff8c00; }
-    35% { stroke: hsl(228, 100%, 87%); }
-    100% { stroke: #ff8c00; }
+    0%, 50% { stroke: oklch(70% 0.2 50); }
+    15% { stroke: oklch(42.4% 0.199 265.638); }
+    35% { stroke: oklch(42.4% 0.199 265.638); }
+    100% { stroke: oklch(70% 0.2 50); }
 }
 </style>

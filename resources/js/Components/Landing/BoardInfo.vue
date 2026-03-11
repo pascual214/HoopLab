@@ -19,9 +19,9 @@
                 />
             </div>
         </div>
-        <div class="flex flex-col items-center justify-center gap-15 lg:flex-row">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row lg:items-center lg:justify-center gap-15">
             <!-- Primera tarjeta -->
-            <div class="card w-75 bg-base-100 card-lg shadow-sm">
+            <div class="card w-75 bg-base-100 card-lg shadow-sm transition-transform duration-300 hover:-translate-y-2">
                 <div class="card-body">
                     <h2 class="card-title">Medium Card</h2>
                     <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -31,7 +31,7 @@
             </div>
 
             <!-- Segunda tarjeta -->
-            <div class="card w-75 bg-base-100 card-lg shadow-sm">
+            <div class="card w-75 bg-base-100 card-lg shadow-sm transition-transform duration-300 hover:-translate-y-2">
                 <div class="card-body">
                     <h2 class="card-title">Medium Card</h2>
                     <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -41,7 +41,7 @@
             </div>
 
             <!-- Tercera tarjeta -->
-            <div class="card w-75 bg-base-100 card-lg shadow-sm">
+            <div class="card w-75 bg-base-100 card-lg shadow-sm transition-transform duration-300 hover:-translate-y-2 sm:col-span-2 sm:justify-self-center lg:col-span-1">
                 <div class="card-body">
                     <h2 class="card-title">Medium Card</h2>
                     <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>

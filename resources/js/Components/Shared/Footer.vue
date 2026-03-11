@@ -5,7 +5,7 @@ import BallIcon from '../BallIcon.vue';
 </script>
 
 <template>
-    <footer class="flex flex-col items-center justify-around w-full py-16 text-sm bg-slate-50 text-gray-800/70">
+    <footer class="flex flex-col items-center justify-around w-full py-16 text-sm bg-white text-gray-800/70">
         <div class="flex flex-row items-center gap-2">
             <BallIcon />
             <p class="icon">HoopLab</p>
