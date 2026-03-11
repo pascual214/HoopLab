@@ -19,7 +19,7 @@
             </div>
 
         <!-- Segunda tarjeta -->
-            <div class="card w-100 lg:w-130 bg-base-100 card-lg shadow-sm transition-transform duration-300 hover:-translate-y-2">
+            <div class="card card-delay-2 w-100 lg:w-130 bg-base-100 card-lg shadow-sm transition-transform duration-300 hover:-translate-y-2">
                 <div class="card-body">
                     <h2 class="card-title">Large Card</h2>
                     <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>

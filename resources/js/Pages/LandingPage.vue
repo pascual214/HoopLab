@@ -5,6 +5,7 @@ import BoardInfo from '@/Components/Landing/BoardInfo.vue';
 import TrainingInfo from '@/Components/Landing/TrainingInfo.vue';
 import CallToAction from '@/Components/Landing/CallToAction.vue';
 import Lenis from 'lenis';
+import { onMounted, ref } from 'vue'
 
 const lenis = new Lenis ({
     duration: 1.4,
@@ -19,19 +20,35 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
+const layoutRef = ref(null)
+
+onMounted(() => {
+    const cards = layoutRef.value.querySelectorAll('.card')
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate')
+            }
+        })
+    }, { threshold: 0.2 })
+
+    cards.forEach(card => observer.observe(card))
+})
 
 // Tu lógica aquí
 </script>
 
 <template>
     <FullLayout>
-        <Hero />
+        <div ref="layoutRef">
+            <Hero />
 
-        <BoardInfo />
+            <BoardInfo />
 
-        <TrainingInfo />
+            <TrainingInfo />
 
-        <CallToAction />
+            <CallToAction />
+        </div>
     </FullLayout>
 </template>
 
@@ -40,4 +57,19 @@ requestAnimationFrame(raf)
 html{
     scroll-behavior: smooth;
 }
+
+:deep(.card) {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 3s cubic-bezier(0.16, 1, 0.3, 1), transform 3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:deep(.card.animate) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+:deep(.card-delay-1.animate) { transition-delay: 0s; }
+:deep(.card-delay-2.animate) { transition-delay: 0.6s; }
+:deep(.card-delay-3.animate) { transition-delay: 1.2s; }
 </style>
