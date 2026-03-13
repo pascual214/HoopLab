@@ -37,7 +37,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
             </a>
         </div>
 
-        <div class="flex-none ml-15">
+        <!-- <div class="flex-none ml-15">
             <ul class="menu menu-horizontal gap-3">
                 <li>
                     <button class="btn btn-ghost font-bold">Home</button>
@@ -47,8 +47,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
                 </li>
             </ul>
 
-            <!-- Implementación de más botones si fuese necesario (contacto, sobre nosotros...) -->
-        </div>
+            Implementación de más botones si fuese necesario (contacto, sobre nosotros...)
+        </div> -->
 
         <!-- Gracias a este div vacío el ancla de la imagen no ocupa toda la largura del div hasta los botones, solo la imágen  -->
         <div class="flex-1"></div>
@@ -72,15 +72,4 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 <style scoped>
 /* Estilos locales */
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 50;
-}
-
-.header-hidden {
-    transform: translateY(-100%);
-}
 </style>
