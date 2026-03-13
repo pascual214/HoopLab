@@ -1,31 +1,35 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted } from 'vue'
+import GuestLayout from '@/Layouts/GuestLayout.vue'
+import Login from '@/Pages/Auth/Login.vue'
+import Register from '@/Pages/Auth/Register.vue'
 
 const headerVisible = ref(true)
 let lastScroll = 0
 
 function handleScroll() {
     const currentScroll = window.scrollY
-
     if (currentScroll < 100) {
-        // Si está cerca de arriba del todo, siempre visible
         headerVisible.value = true
     } else if (currentScroll > lastScroll) {
-        // Scrolleando hacia abajo, ocultar
         headerVisible.value = false
     } else {
-        // Scrolleando hacia arriba, mostrar
         headerVisible.value = true
     }
-
     lastScroll = currentScroll
 }
 
 onMounted(() => window.addEventListener('scroll', handleScroll))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
-// Tu lógica aquí
+const showModal = ref(false)
+const activeTab = ref('login')
+
+function openModal(tab) {
+    activeTab.value = tab
+    showModal.value = true
+}
 </script>
 
 <template>
@@ -37,39 +41,30 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
             </a>
         </div>
 
-        <!-- <div class="flex-none ml-15">
-            <ul class="menu menu-horizontal gap-3">
-                <li>
-                    <button class="btn btn-ghost font-bold">Home</button>
-                </li>
-                <li>
-                    <button class="btn btn-ghost">Pizzara</button>
-                </li>
-            </ul>
-
-            Implementación de más botones si fuese necesario (contacto, sobre nosotros...)
-        </div> -->
-
-        <!-- Gracias a este div vacío el ancla de la imagen no ocupa toda la largura del div hasta los botones, solo la imágen  -->
         <div class="flex-1"></div>
 
         <div class="flex-none">
             <ul class="menu menu-horizontal p-0 gap-5">
                 <li>
-                    <Link href="register" class="p-0">
-                        <button class="btn btn-primary" @click="">Registrarse</button>
-                    </Link>
+                    <button class="btn btn-primary" @click="openModal('register')">Registrarse</button>
                 </li>
                 <li>
-                    <Link href="login" class="p-0">
-                        <button class="btn btn-primary">Iniciar sesión</button>
-                    </Link>
+                    <button class="btn btn-primary" @click="openModal('login')">Iniciar sesión</button>
                 </li>
             </ul>
         </div>
     </div>
+
+    <GuestLayout
+        :isOpen="showModal"
+        :activeTab="activeTab"
+        @close="showModal = false"
+        @switchTab="activeTab = $event"
+    >
+        <Login v-if="activeTab === 'login'" />
+        <Register v-else />
+    </GuestLayout>
 </template>
 
 <style scoped>
-/* Estilos locales */
 </style>
