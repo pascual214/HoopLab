@@ -25,56 +25,60 @@ const submit = () => {
 
     <form @submit.prevent="submit" class="flex flex-col gap-4">
         <div>
-            <label class="text-sm font-medium text-gray-700 mb-1 block">Nombre</label>
             <input
                 v-model="form.name"
                 type="text"
-                placeholder="Tu nombre"
+                placeholder="Nombre"
                 class="w-full border border-gray-200 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             <InputError class="mt-1" :message="form.errors.name" />
         </div>
 
         <div>
-            <label class="text-sm font-medium text-gray-700 mb-1 block">Correo electrónico</label>
             <input
                 v-model="form.email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Correo electrónico"
                 class="w-full border border-gray-200 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             <InputError class="mt-1" :message="form.errors.email" />
         </div>
 
         <div>
-            <label class="text-sm font-medium text-gray-700 mb-1 block">Contraseña</label>
             <div class="relative">
                 <input
                     v-model="form.password"
                     :type="showPassword ? 'text' : 'password'"
-                    placeholder="Enter your Password"
+                    placeholder="Contraseña"
                     class="w-full border border-gray-200 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 pr-12"
                 />
                 <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" @click="showPassword = !showPassword">
-                    <span v-if="showPassword">👁️</span>
-                    <span v-else>🙈</span>
+                    <span v-if="showPassword">
+                        <img src="/images/logo/ojo.png" alt="" class="w-5">
+                    </span>
+                    <span v-else>
+                        <img src="/images/logo/invisible.png" alt="" class="w-5">
+                    </span>
                 </button>
             </div>
             <InputError class="mt-1" :message="form.errors.password" />
         </div>
 
         <div>
-            <label class="text-sm font-medium text-gray-700 mb-1 block">Confirmar contraseña</label>
             <div class="relative">
                 <input
                     v-model="form.password_confirmation"
                     :type="showConfirm ? 'text' : 'password'"
-                    placeholder="Confirm your Password"
+                    placeholder="Repita su contraseña"
                     class="w-full border border-gray-200 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 pr-12"
                 />
                 <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" @click="showConfirm = !showConfirm">
-                    <span v-if="showConfirm">👁️</span>
-                    <span v-else>🙈</span>
+                    <span v-if="showConfirm">
+                        <img src="/images/logo/ojo.png" alt="" class="w-5">
+                    </span>
+                    <span v-else>
+                        <img src="/images/logo/invisible.png" alt="" class="w-5">
+                    </span>
                 </button>
             </div>
             <InputError class="mt-1" :message="form.errors.password_confirmation" />

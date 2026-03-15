@@ -10,12 +10,10 @@ let lastScroll = 0
 
 function handleScroll() {
     const currentScroll = window.scrollY
-    if (currentScroll < 100) {
+    if (currentScroll < 150) {
         headerVisible.value = true
-    } else if (currentScroll > lastScroll) {
-        headerVisible.value = false
     } else {
-        headerVisible.value = true
+        headerVisible.value = false
     }
     lastScroll = currentScroll
 }
