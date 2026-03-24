@@ -46,7 +46,7 @@ const user = computed(() => !!page.props.auth.user);
         <div class="flex-1"></div>
 
         <div v-if="user" class="flex gap-2">
-            <Link href="logout" method="post" as="button" class="btn btn-primary">
+            <Link href="logout" method="post" as="button" class="btn btn-soft btn-primary">
                 Cerrar Sesión
             </Link>
             <div class="dropdown dropdown-end">
