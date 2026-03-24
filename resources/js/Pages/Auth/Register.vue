@@ -54,10 +54,10 @@ const submit = () => {
                 />
                 <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" @click="showPassword = !showPassword">
                     <span v-if="showPassword">
-                        <img src="/images/logo/ojo.png" alt="" class="w-5">
+                        <img src="/images/logo/ojo.png" alt="" class="w-4 cursor-pointer">
                     </span>
                     <span v-else>
-                        <img src="/images/logo/invisible.png" alt="" class="w-5">
+                        <img src="/images/logo/invisible.png" alt="" class="w-4 cursor-pointer">
                     </span>
                 </button>
             </div>
@@ -74,10 +74,10 @@ const submit = () => {
                 />
                 <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" @click="showConfirm = !showConfirm">
                     <span v-if="showConfirm">
-                        <img src="/images/logo/ojo.png" alt="" class="w-5">
+                        <img src="/images/logo/ojo.png" alt="" class="w-4 cursor-pointer">
                     </span>
                     <span v-else>
-                        <img src="/images/logo/invisible.png" alt="" class="w-5">
+                        <img src="/images/logo/invisible.png" alt="" class="w-4 cursor-pointer">
                     </span>
                 </button>
             </div>

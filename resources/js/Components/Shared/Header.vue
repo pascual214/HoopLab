@@ -1,6 +1,6 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import { ref, onMounted, onUnmounted } from 'vue'
+import { Link, usePage } from '@inertiajs/vue3';
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 import Login from '@/Pages/Auth/Login.vue'
 import Register from '@/Pages/Auth/Register.vue'
@@ -28,6 +28,10 @@ function openModal(tab) {
     activeTab.value = tab
     showModal.value = true
 }
+
+//Autenticación
+const page = usePage();
+const user = computed(() => !!page.props.auth.user);
 </script>
 
 <template>
@@ -41,7 +45,34 @@ function openModal(tab) {
 
         <div class="flex-1"></div>
 
-        <div class="flex-none">
+        <div v-if="user" class="flex gap-2">
+            <Link href="logout" method="post" as="button" class="btn btn-primary">
+                Cerrar Sesión
+            </Link>
+            <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                <img
+                    alt="Tailwind CSS Navbar component"
+                    src="images/logo/usuario_logo.jpg" />
+                </div>
+            </div>
+            <ul
+                tabindex="-1"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li>
+                <a class="justify-between">
+                    Profile
+                    <span class="badge">New</span>
+                </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+            </div>
+        </div>
+
+        <div v-else class="flex-none">
             <ul class="menu menu-horizontal p-0 gap-5">
                 <li>
                     <button class="btn btn-primary" @click="openModal('register')">Registrarse</button>

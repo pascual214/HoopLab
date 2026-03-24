@@ -54,10 +54,10 @@ const submit = () => {
                     @click="showPassword = !showPassword"
                 >
                     <span v-if="showPassword">
-                        <img src="/images/logo/ojo.png" alt="" class="w-5">
+                        <img src="/images/logo/ojo.png" alt="" class="w-4 cursor-pointer">
                     </span>
                     <span v-else>
-                        <img src="/images/logo/invisible.png" alt="" class="w-5">
+                        <img src="/images/logo/invisible.png" alt="" class="w-4 cursor-pointer">
                     </span>
                 </button>
             </div>
