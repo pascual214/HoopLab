@@ -45,30 +45,57 @@ const user = computed(() => !!page.props.auth.user);
 
         <div class="flex-1"></div>
 
-        <div v-if="user" class="flex gap-2">
-            <Link href="logout" method="post" as="button" class="btn btn-soft btn-primary">
-                Cerrar Sesión
-            </Link>
+        <div v-if="user" class="flex items-center gap-3">
+            <p class="text-sm text-gray-500 hidden md:block">
+                Hola, <span class="font-semibold text-gray-800">  </span>
+            </p>
+
+            <!-- Dropdown -->
             <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
-                <img
-                    alt="Tailwind CSS Navbar component"
-                    src="images/logo/usuario_logo.jpg" />
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar w-12 h-12">
+                    <div class="w-auto rounded-full">
+                    <img
+                        alt="User logo"
+                        src="images/logo/usuario_logo.jpg" />
+                    </div>
                 </div>
-            </div>
-            <ul
-                tabindex="-1"
-                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                <li>
-                <a class="justify-between">
-                    Profile
-                    <span class="badge">New</span>
-                </a>
-                </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-            </ul>
+
+                <ul
+                    tabindex="0"
+                    class="dropdown-content z-50 mt-3 w-52 origin-top-right rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-1.5 flex flex-col gap-0.5"
+                >
+
+                    <!-- Perfil -->
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150 group">
+                            <div class="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
+                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                            Perfil
+                        </a>
+                    </li>
+
+                    <li class="my-1 border-t border-gray-100"></li>
+
+                    <!-- Cerrar sesión -->
+                    <li>
+                        <Link
+                            href="/logout"
+                            method="post"
+                            as="button"
+                            class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-50 transition-colors duration-150 group"
+                        >
+                            <div class="w-7 h-7 rounded-lg bg-red-50 group-hover:bg-red-100 flex items-center justify-center transition-colors">
+                                <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                            </div>
+                            Cerrar sesión
+                        </Link>
+                    </li>
+                </ul>
             </div>
         </div>
 
