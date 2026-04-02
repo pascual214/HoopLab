@@ -9,7 +9,6 @@ import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const mode = ref("individual");
-
 </script>
 
 <template>
@@ -19,7 +18,7 @@ const mode = ref("individual");
         <TopSection :mode="mode" @update:mode="mode = $event" />
 
         <div class="px-20 py-9">
-            <div class="flex w-full flex-col lg:flex-row">
+            <div class="flex w-full flex-col lg:flex-row ">
                 <div
                     class="card bg-base-300 rounded-box grid grow place-items-center lg:basis-4/7"
                 >
@@ -28,7 +27,7 @@ const mode = ref("individual");
                 </div>
                 <div class="divider lg:divider-horizontal"></div>
                 <div
-                    class="card bg-base-300 rounded-box grid grow place-items-center lg:basis-3/7"
+                    class="card bg-gray-200 rounded-box grid grow place-items-center lg:basis-3/7 min-h-[80vh] "
                 >
                     <RightPanel />
                 </div>

@@ -3,9 +3,11 @@
 </script>
 
 <template>
-    <div class="bg-gray-100 p-4 rounded">
-        <h3 class="text-lg font-semibold mb-2">Panel derecho</h3>
-        <p>Contenido fijo que siempre se muestra aquí.</p>
+    <div class="flex flex-col items-center gap-3 p-8 text-center">
+        <p class="text-gray-500 font-semibold text-base">Entrenamiento vacío</p>
+        <p class="text-gray-500 text-sm">
+            Arrastra ejercicios aquí para añadirlos al entrenamiento
+        </p>
     </div>
 </template>
 

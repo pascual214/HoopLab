@@ -5,10 +5,16 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import Login from "@/Pages/Auth/Login.vue";
 import Register from "@/Pages/Auth/Register.vue";
 
+const isLanding = computed(() => page.url === "/");
 const headerVisible = ref(true);
 let lastScroll = 0;
 
 function handleScroll() {
+    if(!isLanding.value){
+        headerVisible.value = true;
+        return;
+    }
+
     const currentScroll = window.scrollY;
     if (currentScroll < 150) {
         headerVisible.value = true;
