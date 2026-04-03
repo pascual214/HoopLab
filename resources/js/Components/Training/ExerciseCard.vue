@@ -1,5 +1,9 @@
 <script setup>
 // Tu lógica aquí
+const props = defineProps({
+    exercise: Object
+});
+
 </script>
 
 <template>
