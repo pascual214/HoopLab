@@ -1,6 +1,20 @@
 <script setup>
-import Footer from '@/Components/Shared/Footer.vue';
-import Header from '@/Components/Shared/Header.vue';
+import Footer from "@/Components/Shared/Footer.vue";
+import Header from "@/Components/Shared/Header.vue";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import Login from "@/Pages/Auth/Login.vue";
+import Register from "@/Pages/Auth/Register.vue";
+import { ref, provide } from "vue";
+
+const showModal = ref(false);
+const activeTab = ref("login");
+
+function openModal(tab = "login") {
+    activeTab.value = tab;
+    showModal.value = true;
+}
+
+provide("openModal", openModal);
 
 // Tu lógica aquí
 </script>
@@ -13,6 +27,16 @@ import Header from '@/Components/Shared/Header.vue';
     </main>
 
     <Footer />
+
+    <GuestLayout
+        :isOpen="showModal"
+        :activeTab="activeTab"
+        @close="showModal = false"
+        @switchTab="activeTab = $event"
+    >
+        <Login v-if="activeTab === 'login'" />
+        <Register v-else />
+    </GuestLayout>
 </template>
 
 <style scoped>

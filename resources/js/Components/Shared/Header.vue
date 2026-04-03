@@ -1,16 +1,14 @@
 <script setup>
 import { Link, usePage } from "@inertiajs/vue3";
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import Login from "@/Pages/Auth/Login.vue";
-import Register from "@/Pages/Auth/Register.vue";
+import { inject } from "vue";
 
 const isLanding = computed(() => page.url === "/");
 const headerVisible = ref(true);
 let lastScroll = 0;
 
 function handleScroll() {
-    if(!isLanding.value){
+    if (!isLanding.value) {
         headerVisible.value = true;
         return;
     }
@@ -27,13 +25,7 @@ function handleScroll() {
 onMounted(() => window.addEventListener("scroll", handleScroll));
 onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 
-const showModal = ref(false);
-const activeTab = ref("login");
-
-function openModal(tab) {
-    activeTab.value = tab;
-    showModal.value = true;
-}
+const openModal = inject("openModal");
 
 //Autenticación
 const page = usePage();
@@ -160,16 +152,6 @@ const user = computed(() => !!page.props.auth.user);
             </ul>
         </div>
     </div>
-
-    <GuestLayout
-        :isOpen="showModal"
-        :activeTab="activeTab"
-        @close="showModal = false"
-        @switchTab="activeTab = $event"
-    >
-        <Login v-if="activeTab === 'login'" />
-        <Register v-else />
-    </GuestLayout>
 </template>
 
 <style scoped></style>
