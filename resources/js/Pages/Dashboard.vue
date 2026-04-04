@@ -9,6 +9,7 @@ import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const mode = ref("individual");
+const trainingExercises = ref([]);
 </script>
 
 <template>
@@ -29,7 +30,7 @@ const mode = ref("individual");
                 <div
                     class="card bg-gray-200 rounded-box grid grow place-items-center lg:basis-3/7 min-h-[80vh] "
                 >
-                    <RightPanel />
+                    <RightPanel :trainingExercises = "trainingExercises" />
                 </div>
             </div>
         </div>
