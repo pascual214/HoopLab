@@ -29,7 +29,7 @@ const openModal = inject("openModal");
 
 //Autenticación
 const page = usePage();
-const user = computed(() => !!page.props.auth.user);
+const auth = computed(() => page.props.auth);
 </script>
 
 <template>
@@ -49,9 +49,9 @@ const user = computed(() => !!page.props.auth.user);
 
         <div class="flex-1"></div>
 
-        <div v-if="user" class="flex items-center gap-3">
+        <div v-if="auth.user" class="flex items-center gap-3">
             <p class="text-sm text-gray-500 hidden md:block">
-                Hola, <span class="font-semibold text-gray-800"> </span>
+                Hola, <span class="font-semibold text-gray-800"> {{ auth.user.name }}</span>
             </p>
 
             <!-- Dropdown -->
@@ -80,7 +80,7 @@ const user = computed(() => !!page.props.auth.user);
                             class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150 group"
                         >
                             <div
-                                class="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors"
+                                class="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors cursor-pointer"
                             >
                                 <svg
                                     class="w-3.5 h-3.5 text-gray-500 group-hover:text-blue-500"
@@ -108,7 +108,7 @@ const user = computed(() => !!page.props.auth.user);
                             href="/logout"
                             method="post"
                             as="button"
-                            class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-50 transition-colors duration-150 group"
+                            class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-50 transition-colors duration-150 group  cursor-pointer"
                         >
                             <div
                                 class="w-7 h-7 rounded-lg bg-red-50 group-hover:bg-red-100 flex items-center justify-center transition-colors"

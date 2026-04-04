@@ -3,7 +3,6 @@ import IndividualEx from "@/Components/MainPage/IndividualEx.vue";
 import RightPanel from "@/Components/MainPage/RightPanel.vue";
 import TeamEx from "@/Components/MainPage/TeamEx.vue";
 import TopSection from "@/Components/MainPage/TopSection.vue";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import FullLayout from "@/Layouts/FullLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";

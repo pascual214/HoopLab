@@ -27,7 +27,7 @@ watch(
             item-key="id_exercise"
             class="space-y-2 border p-2 w-full flex-1"
         >
-            <template #item="{ element, index }">
+            <template #item="{ element }">
                 <ExerciseCard :exercise="element" />
             </template>
         </draggable>
