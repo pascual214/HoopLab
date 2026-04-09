@@ -17,10 +17,17 @@ watch(
         localTraining.value = [...newVal];
     },
 );
+
+const removeExercise = (id) => {
+    localTraining.value = localTraining.value.filter(
+        (ex) => ex.id_exercise !== id,
+    );
+};
 </script>
 
 <template>
     <div class="flex flex-col gap-3 p-8 text-center h-full w-full">
+        <h3 class="text-lg font-semibold mb-2">Entrenamiento</h3>
         <draggable
             v-model="localTraining"
             group="exercises"
@@ -28,8 +35,13 @@ watch(
             class="space-y-2 border p-2 w-full flex-1"
         >
             <template #item="{ element }">
-                <ExerciseCard :exercise="element" />
+                <ExerciseCard
+                    :exercise="element"
+                    :isInTraining="true"
+                    @remove="removeExercise"
+                />
             </template>
         </draggable>
+        <button class="btn">Guardar entrenamiento</button>
     </div>
 </template>

@@ -51,7 +51,10 @@ const auth = computed(() => page.props.auth);
 
         <div v-if="auth.user" class="flex items-center gap-3">
             <p class="text-sm text-gray-500 hidden md:block">
-                Hola, <span class="font-semibold text-gray-800"> {{ auth.user.name }}</span>
+                Hola,
+                <span class="font-semibold text-gray-800">
+                    {{ auth.user.name }}</span
+                >
             </p>
 
             <!-- Dropdown -->
@@ -108,7 +111,7 @@ const auth = computed(() => page.props.auth);
                             href="/logout"
                             method="post"
                             as="button"
-                            class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-50 transition-colors duration-150 group  cursor-pointer"
+                            class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-50 transition-colors duration-150 group cursor-pointer"
                         >
                             <div
                                 class="w-7 h-7 rounded-lg bg-red-50 group-hover:bg-red-100 flex items-center justify-center transition-colors"
@@ -154,4 +157,5 @@ const auth = computed(() => page.props.auth);
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

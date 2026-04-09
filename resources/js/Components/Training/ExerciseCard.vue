@@ -7,6 +7,10 @@ export default {
             type: Object,
             required: true,
         },
+        isInTraining: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     methods: {
@@ -52,7 +56,10 @@ export default {
 
 <template>
     <div
-        class="bg-white border border-gray-200 rounded-2xl p-5 max-w-full shadow-sm"
+        :class="[
+            'bg-white border border-gray-200 rounded-2xl p-5 max-w-full shadow-sm relative',
+            isInTraining ? 'pb-10' : 'pb-5'
+        ]"
     >
         <h2 class="text-base font-bold text-gray-900 leading-snug mb-2">
             {{ exercise.title }}
@@ -68,7 +75,7 @@ export default {
                 <span class="text-xs text-gray-400 font-medium">Tipo:</span>
                 <span class="text-xs text-gray-700 font-medium">
                     {{ exercise.type }}
-                    </span>
+                </span>
             </div>
 
             <!-- Dificultad -->
@@ -104,7 +111,13 @@ export default {
                     </span>
                 </div>
             </div>
-        </div>
+            
+        </div><button
+                v-if="isInTraining"
+                @click="$emit('remove', exercise.id_exercise)"
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600"
+            >
+                Borrar
+            </button>
     </div>
 </template>
-
