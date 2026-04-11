@@ -34,8 +34,11 @@ const auth = computed(() => page.props.auth);
 
 <template>
     <div
-        class="navbar bg-white/30 backdrop-blur-md border-b border-white/20 shadow-lg px-10 fixed top-0 w-full z-50 transition-transform duration-400"
-        :class="{ '-translate-y-full': !headerVisible }"
+        :class="[
+            'navbar bg-white/30 backdrop-blur-md border-b border-white/20 shadow-lg px-10 w-full z-50 transition-transform duration-400',
+            isLanding ? 'fixed top-0' : 'relative',
+            { '-translate-y-full': !headerVisible },
+        ]"
     >
         <div class="flex-none">
             <a href="/" class="inline-block">
@@ -157,5 +160,4 @@ const auth = computed(() => page.props.auth);
     </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

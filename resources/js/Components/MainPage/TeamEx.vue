@@ -10,7 +10,7 @@ const exercises = ref([...page.props.teamExercises]); // ref local para sortable
 </script>
 
 <template>
-    <div class="bg-gray-100 p-4 rounded">
+    <div class="bg-gray-100 p-4 rounded text-center">
         <h3 class="text-lg font-semibold mb-2">Ejercicios de equipo</h3>
         <draggable
             :list="exercises"

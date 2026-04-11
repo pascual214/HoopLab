@@ -9,7 +9,7 @@ const exercises = ref([...page.props.individualExercises]); // ref local para so
 </script>
 
 <template>
-    <div class="bg-gray-100 p-4 rounded">
+    <div class="bg-gray-100 p-4 rounded text-center">
         <h3 class="text-lg font-semibold mb-2">Ejercicios individuales</h3>
         <draggable
             :list="exercises"

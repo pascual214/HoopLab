@@ -42,6 +42,6 @@ const removeExercise = (id) => {
                 />
             </template>
         </draggable>
-        <button class="btn">Guardar entrenamiento</button>
+        <button class="btn btn-primary">Guardar entrenamiento</button>
     </div>
 </template>
