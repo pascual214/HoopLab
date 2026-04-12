@@ -57,7 +57,7 @@ export default {
 <template>
     <div
         :class="[
-            'bg-white border border-gray-200 rounded-2xl p-5 max-w-full shadow-sm relative',
+            'bg-white border border-gray-200 rounded-2xl p-5 max-w-full shadow-sm relative px-10',
             isInTraining ? 'pb-10' : 'pb-5'
         ]"
     >
@@ -115,7 +115,7 @@ export default {
         </div><button
                 v-if="isInTraining"
                 @click="$emit('remove', exercise.id_exercise)"
-                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600"
+                class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600 cursor-pointer"
             >
                 Borrar
             </button>

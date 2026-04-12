@@ -27,12 +27,17 @@ const removeExercise = (id) => {
 
 <template>
     <div class="flex flex-col gap-3 p-8 text-center h-full w-full">
-        <h3 class="text-lg font-semibold mb-2">Entrenamiento</h3>
+        <div class="mb-5 text-center">
+            <h3 class="text-base font-bold text-slate-700 tracking-wide uppercase">
+                Ejercicios de equipo
+            </h3>
+            <div class="mx-auto mt-1.5 h-0.5 w-10 rounded-full bg-blue-500"></div>
+        </div>
         <draggable
             v-model="localTraining"
             group="exercises"
             item-key="id_exercise"
-            class="space-y-2 border p-2 w-full flex-1"
+            class="space-y-2 w-full flex-1"
         >
             <template #item="{ element }">
                 <ExerciseCard
