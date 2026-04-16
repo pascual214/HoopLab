@@ -29,7 +29,7 @@ const removeExercise = (id) => {
     <div class="flex flex-col gap-3 p-8 text-center h-full w-full">
         <div class="mb-5 text-center">
             <h3 class="text-base font-bold text-slate-700 tracking-wide uppercase">
-                Ejercicios de equipo
+                Entrenamiento
             </h3>
             <div class="mx-auto mt-1.5 h-0.5 w-10 rounded-full bg-blue-500"></div>
         </div>

@@ -10,7 +10,7 @@ const exercises = ref([...page.props.teamExercises]); // ref local para sortable
 </script>
 
 <template>
-    <div class="relative overflow-hidden p-6">
+    <div class="relative overflow-hidden p-8">
 
         <!-- Cabecera -->
         <div class="mb-5 text-center">

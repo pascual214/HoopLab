@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Exercise extends Model
 {
-    protected $table = 'exercise'; // importante si tu tabla NO es 'exercises'
-
-    protected $primaryKey = 'id_exercise'; // porque no usas 'id'
-
-    public $timestamps = false; // si no tienes created_at / updated_at
+    protected $table = 'exercise';
+    protected $primaryKey = 'id_exercise';
+    public $timestamps = false;
 
     protected $fillable = [
         'title',

@@ -67,10 +67,15 @@ const auth = computed(() => page.props.auth);
                     role="button"
                     class="btn btn-ghost btn-circle avatar w-12 h-12"
                 >
-                    <div class="w-auto rounded-full">
+                    <div class="w-auto rounded-full border">
                         <img
                             alt="User logo"
-                            src="images/logo/usuario_logo.jpg"
+                            :src="
+                                auth.user.picture
+                                    ? `/storage/${auth.user.picture}`
+                                    : '/images/logo/usuario_logo.jpg'
+                            "
+                            class="w-full h-full object-cover"
                         />
                     </div>
                 </div>
@@ -81,8 +86,8 @@ const auth = computed(() => page.props.auth);
                 >
                     <!-- Perfil -->
                     <li>
-                        <a
-                            href="#"
+                        <Link
+                            :href="route('profile.edit')"
                             class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150 group"
                         >
                             <div
@@ -103,7 +108,7 @@ const auth = computed(() => page.props.auth);
                                 </svg>
                             </div>
                             Perfil
-                        </a>
+                        </Link>
                     </li>
 
                     <li class="my-1 border-t border-gray-100"></li>

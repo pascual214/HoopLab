@@ -18,7 +18,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
+        return Inertia::render('Profile/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
@@ -59,5 +59,22 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function updatePicture(Request $request)
+    {
+        $request->validate([
+            'picture' => 'required|image|max:2048',
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('picture')) {
+            $path = $request->file('picture')->store('profiles', 'public');
+            $user->picture = $path;
+            $user->save();
+        }
+
+        return back();
     }
 }
