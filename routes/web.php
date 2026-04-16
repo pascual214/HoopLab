@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\Auth\PasswordController;
 
 Route::get('/', function () {
     return Inertia::render('LandingPage', [
@@ -25,5 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
 });
+
+Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
 require __DIR__.'/auth.php';
