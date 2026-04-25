@@ -1,6 +1,7 @@
 <script setup>
 import draggable from "vuedraggable";
 import ExerciseCard from "../Training/ExerciseCard.vue";
+import TrainingSaveModal from "../Training/TrainingSaveModal.vue";
 import { ref, watch } from "vue";
 
 const props = defineProps({
@@ -22,6 +23,24 @@ const removeExercise = (id) => {
     localTraining.value = localTraining.value.filter(
         (ex) => ex.id_exercise !== id,
     );
+};
+
+// Estado del modal
+const showModal = ref(false);
+
+const openSaveModal = () => {
+    if (localTraining.value.length === 0) {
+        return;
+    }
+    showModal.value = true;
+};
+
+const closeModal = () => {
+    showModal.value = false;
+};
+
+const handleSave = () => {
+    showModal.value = false;
 };
 </script>
 
@@ -47,6 +66,26 @@ const removeExercise = (id) => {
                 />
             </template>
         </draggable>
-        <button class="btn btn-primary">Guardar entrenamiento</button>
+
+        <!-- Mensaje cuando no hay ejercicios -->
+        <div v-if="localTraining.length === 0" class="text-center text-gray-500 py-8">
+            <p>Arrastra ejercicios aquí para crear tu entrenamiento</p>
+        </div>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            :disabled="localTraining.length === 0"
+            @click="openSaveModal"
+        >
+            Guardar entrenamiento
+        </button>
+
+        <TrainingSaveModal
+            :show="showModal"
+            :exercises="localTraining"
+            @close="closeModal"
+            @saved="handleSave"
+        />
     </div>
 </template>
