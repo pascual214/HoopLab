@@ -1,8 +1,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import TrainingCard from "@/Components/Training/TrainingCard.vue";
+
+const props = defineProps({
+    trainings: {
+        type: Array,
+        default: () => [],
+    },
+});
 
 const tabs = ["Ejercicios", "Entrenamientos", "Jugadas"];
-const activeTab = ref("ejercicios");
+const activeTab = ref("entrenamientos");
 
 // Sticky logic
 const tabsRef = ref(null);
@@ -50,8 +58,8 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
             <div v-if="activeTab === 'ejercicios'" class="text-center text-slate-400 py-16">
                 Próximamente — Ejercicios
             </div>
-            <div v-if="activeTab === 'entrenamientos'" class="text-center text-slate-400 py-16">
-                Próximamente — Entrenamientos
+            <div v-if="activeTab === 'entrenamientos'">
+                <TrainingCard :trainings="trainings" />
             </div>
             <div v-if="activeTab === 'jugadas'" class="text-center text-slate-400 py-16">
                 Próximamente — Jugadas

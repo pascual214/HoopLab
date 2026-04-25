@@ -52,24 +52,29 @@ const handleSave = () => {
             </h3>
             <div class="mx-auto mt-1.5 h-0.5 w-10 rounded-full bg-blue-500"></div>
         </div>
-        <draggable
-            v-model="localTraining"
-            group="exercises"
-            item-key="id_exercise"
-            class="space-y-2 w-full flex-1"
-        >
-            <template #item="{ element }">
-                <ExerciseCard
-                    :exercise="element"
-                    :isInTraining="true"
-                    @remove="removeExercise"
-                />
-            </template>
-        </draggable>
 
-        <!-- Mensaje cuando no hay ejercicios -->
-        <div v-if="localTraining.length === 0" class="text-center text-gray-500 py-8">
-            <p>Arrastra ejercicios aquí para crear tu entrenamiento</p>
+        <div class="relative flex-1 w-full">
+            <draggable
+                v-model="localTraining"
+                group="exercises"
+                item-key="id_exercise"
+                class="space-y-2 w-full h-full"
+            >
+                <template #item="{ element }">
+                    <ExerciseCard
+                        :exercise="element"
+                        :isInTraining="true"
+                        @remove="removeExercise"
+                    />
+                </template>
+            </draggable>
+
+            <div
+                v-if="localTraining.length === 0"
+                class="absolute inset-0 flex items-center justify-center text-gray-400 pointer-events-none"
+            >
+                <p>Arrastra ejercicios aquí para crear tu entrenamiento</p>
+            </div>
         </div>
 
         <button

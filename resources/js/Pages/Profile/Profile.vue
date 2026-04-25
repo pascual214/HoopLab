@@ -9,6 +9,7 @@ import ProfileTabs from "@/Components/Profile/ProfileTabs.vue";
 defineProps({
     mustVerifyEmail: { type: Boolean },
     status: { type: String },
+    trainings: { type: Array, default: () => [] },
 });
 
 const goBack = () => {
@@ -117,6 +118,6 @@ function handleFileChange(e) {
         </div>
 
         <!-- Tabs sticky + contenido -->
-        <ProfileTabs />
+        <ProfileTabs :trainings="trainings" />
     </FullLayout>
 </template>
