@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/trainings', [\App\Http\Controllers\TrainingController::class, 'store'])
         ->name('trainings.store');
 
+    Route::get('/trainings/{training}', [\App\Http\Controllers\TrainingController::class, 'show'])
+        ->name('trainings.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

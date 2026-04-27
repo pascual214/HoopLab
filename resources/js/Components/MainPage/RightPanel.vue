@@ -8,6 +8,8 @@ const props = defineProps({
     trainingExercises: Array,
 });
 
+const emit = defineEmits(["saved"]);
+
 // Creamos un ref local que será el v-model real
 const localTraining = ref([...props.trainingExercises]);
 
@@ -40,6 +42,8 @@ const closeModal = () => {
 };
 
 const handleSave = () => {
+    localTraining.value = [];
+    emit("saved");
     showModal.value = false;
 };
 </script>

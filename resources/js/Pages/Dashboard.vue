@@ -9,6 +9,10 @@ import { ref } from "vue";
 
 const mode = ref("individual");
 const trainingExercises = ref([]);
+
+const clearTrainingExercises = () => {
+    trainingExercises.value = [];
+};
 </script>
 
 <template>
@@ -29,7 +33,10 @@ const trainingExercises = ref([]);
                 <div
                     class="card bg-gray-200 rounded-box grid grow place-items-center lg:basis-3/7 min-h-[80vh] "
                 >
-                    <RightPanel :trainingExercises = "trainingExercises" />
+                    <RightPanel
+                        :trainingExercises="trainingExercises"
+                        @saved="clearTrainingExercises"
+                    />
                 </div>
             </div>
         </div>

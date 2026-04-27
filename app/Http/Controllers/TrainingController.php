@@ -6,6 +6,7 @@ use App\Models\Training;
 use App\Models\TrainingExercise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class TrainingController extends Controller
 {
@@ -41,5 +42,18 @@ class TrainingController extends Controller
         });
 
         return redirect()->back()->with('success', 'Entrenamiento guardado correctamente.');
+    }
+
+    public function show(Training $training)
+    {
+        if ($training->id_user !== auth()->id()) {
+            abort(403);
+        }
+
+        $training->load(['exercises.exercise']);
+
+        return Inertia::render('Training/TrainingDetails', [
+            'training' => $training,
+        ]);
     }
 }

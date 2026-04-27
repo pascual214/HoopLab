@@ -8,7 +8,8 @@ class Training extends Model
 {
     protected $table = 'training';
     protected $primaryKey = 'id_training';
-    public $timestamps = false;
+    public $timestamps = true;
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'id_user',
