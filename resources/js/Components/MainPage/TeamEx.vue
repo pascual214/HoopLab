@@ -1,12 +1,34 @@
 <script setup>
 // Tu lógica aquí
 import ExerciseCard from "../Training/ExerciseCard.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import draggable from "vuedraggable";
 import { usePage } from "@inertiajs/vue3";
 
 const page = usePage();
-const exercises = ref([...page.props.teamExercises]); // ref local para sortable
+const allExercises = ref([...page.props.teamExercises]); // ref local para sortable
+
+const props = defineProps({
+    filter: {
+        type: Object,
+        default: () => ({ filterType: "", filterValue: "" }),
+    },
+});
+
+const exercises = computed(() => {
+    if (!props.filter.filterType || !props.filter.filterValue) {
+        return allExercises.value;
+    }
+
+    return allExercises.value.filter((exercise) => {
+        if (props.filter.filterType === "tipo") {
+            return exercise.type === props.filter.filterValue;
+        } else if (props.filter.filterType === "dificultad") {
+            return exercise.difficulty === props.filter.filterValue;
+        }
+        return true;
+    });
+});
 </script>
 
 <template>

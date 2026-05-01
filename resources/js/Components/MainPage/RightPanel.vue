@@ -49,7 +49,7 @@ const handleSave = () => {
 </script>
 
 <template>
-    <div class="flex flex-col gap-3 p-8 text-center h-full w-full">
+    <div class="flex flex-col gap-3 p-8 h-full w-full">
         <div class="mb-5 text-center">
             <h3 class="text-base font-bold text-slate-700 tracking-wide uppercase">
                 Entrenamiento
