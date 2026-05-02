@@ -93,7 +93,7 @@ const resetFilters = () => {
         <!-- Botón para limpiar filtros -->
         <button
             @click="resetFilters"
-            class="px-3 py-1.5 text-gray-800 font-medium rounded-md text-sm transition-colors duration-200 hover:bg-gray-200"
+            class="px-3 py-1.5 text-gray-800 font-medium rounded-md text-sm transition-colors duration-200 hover:bg-gray-200 cursor-pointer"
         >
             Limpiar
         </button>

@@ -1,4 +1,5 @@
 <script setup>
+import { Link } from "@inertiajs/vue3";
 import ExerciseFilter from "@/Components/Training/ExerciseFilter.vue";
 
 const props = defineProps({
@@ -17,8 +18,18 @@ const handleFilterChange = (filterData) => {
 </script>
 
 <template>
-    <div class="bg-blue-200">
-        <h2 class="text-center">Diseña tu entrenamiento</h2>
+    <div class="bg-blue-200 px-4 py-6 text-center">
+        <h2 class="text-center text-xl font-semibold text-slate-800">
+            Diseña tu entrenamiento
+        </h2>
+        <div class="mt-4 flex justify-center">
+            <Link
+                class="btn btn-primary"
+                :href="route('exercises.create')"
+            >
+                Crear Ejercicio
+            </Link>
+        </div>
     </div>
 
     <div class="bg-white sticky top-0 z-20">
@@ -47,10 +58,14 @@ const handleFilterChange = (filterData) => {
                 Ejercicios de equipo
             </button>
         </div>
-        <div class="px-4 py-4 flex items-center justify-center gap-2 bg-white">
-            <span class="text-sm font-medium text-gray-700">Filtrar por:</span>
-            <ExerciseFilter :mode="mode" :available-types="availableTypes" @filter-change="handleFilterChange" />
-        </div>
+    </div>
+    <div class="px-4 py-4 flex items-center justify-center gap-2 bg-white">
+        <span class="text-sm font-medium text-gray-700">Filtrar por:</span>
+        <ExerciseFilter
+            :mode="mode"
+            :available-types="availableTypes"
+            @filter-change="handleFilterChange"
+        />
     </div>
 </template>
 

@@ -54,7 +54,7 @@ function cancelEdit() {
                 <span class="text-sm text-slate-700">
                     <span class="font-bold">Nombre:</span> {{ user.name }}
                 </span>
-                <button @click="editing = 'name'" class="text-blue-600 text-sm font-medium hover:underline">
+                <button @click="editing = 'name'" class="text-blue-600 text-sm font-medium hover:underline cursor-pointer">
                     Editar
                 </button>
             </div>
@@ -79,7 +79,7 @@ function cancelEdit() {
                 <span class="text-sm text-slate-700">
                     <span class="font-bold">Correo:</span> {{ user.email }}
                 </span>
-                <button @click="editing = 'email'" class="text-blue-600 text-sm font-medium hover:underline">
+                <button @click="editing = 'email'" class="text-blue-600 text-sm font-medium hover:underline cursor-pointer">
                     Editar
                 </button>
             </div>
@@ -104,7 +104,7 @@ function cancelEdit() {
                 <span class="text-sm text-slate-700">
                     <span class="font-bold">Contraseña:</span> ••••••••••
                 </span>
-                <button @click="editing = 'password'" class="text-blue-600 text-sm font-medium hover:underline">
+                <button @click="editing = 'password'" class="text-blue-600 text-sm font-medium hover:underline cursor-pointer">
                     Editar
                 </button>
             </div>
