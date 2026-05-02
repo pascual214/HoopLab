@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Exercise;
 use App\Models\Training;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -23,10 +24,15 @@ class ProfileController extends Controller
             ->orderBy('id_training', 'desc')
             ->get();
 
+        $exercises = Exercise::where('id_user', $request->user()->id_user)
+            ->orderBy('id_exercise', 'desc')
+            ->get();
+
         return Inertia::render('Profile/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'trainings' => $trainings,
+            'exercises' => $exercises,
         ]);
     }
 

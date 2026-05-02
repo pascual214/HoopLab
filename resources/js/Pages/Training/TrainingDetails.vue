@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import FullLayout from "@/Layouts/FullLayout.vue";
 import ExerciseCard from "@/Components/Training/ExerciseCard.vue";
 
@@ -10,8 +10,14 @@ const props = defineProps({
     },
 });
 
+const form = useForm();
+
 const goBack = () => {
     window.history.back();
+};
+
+const deleteTraining = () => {
+    form.delete(route('trainings.destroy', props.training.id_training));
 };
 
 const formatDuration = (minutes) => {
@@ -94,6 +100,16 @@ const formatDuration = (minutes) => {
                             <span class="font-semibold">{{ training.exercises.length }}</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="text-center">
+                    <button
+                        @click="deleteTraining"
+                        type="button"
+                        class="btn btn-soft btn-error w-full hover:text-white"
+                    >
+                        Eliminar entrenamiento
+                    </button>
                 </div>
             </aside>
         </div>

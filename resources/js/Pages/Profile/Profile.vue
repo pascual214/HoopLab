@@ -10,6 +10,7 @@ defineProps({
     mustVerifyEmail: { type: Boolean },
     status: { type: String },
     trainings: { type: Array, default: () => [] },
+    exercises: { type: Array, default: () => [] },
 });
 
 const goBack = () => {
@@ -118,6 +119,6 @@ function handleFileChange(e) {
         </div>
 
         <!-- Tabs sticky + contenido -->
-        <ProfileTabs :trainings="trainings" />
+        <ProfileTabs :trainings="trainings" :exercises="exercises" />
     </FullLayout>
 </template>

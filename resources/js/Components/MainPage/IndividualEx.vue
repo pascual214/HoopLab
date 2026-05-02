@@ -31,7 +31,7 @@ const exercises = computed(() => {
 </script>
 
 <template>
-    <div class="relative overflow-hidden p-8">
+    <div class="relative overflow-hidden p-8 self-start">
 
         <!-- Cabecera -->
         <div class="mb-5 text-center">

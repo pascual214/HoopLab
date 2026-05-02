@@ -56,4 +56,15 @@ class TrainingController extends Controller
             'training' => $training,
         ]);
     }
+
+    public function destroy(Training $training)
+    {
+        if ($training->id_user !== auth()->id()) {
+            abort(403);
+        }
+
+        $training->delete();
+
+        return redirect()->route('profile.edit', ['tab' => 'entrenamientos']);
+    }
 }

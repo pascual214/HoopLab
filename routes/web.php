@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/trainings/{training}', [\App\Http\Controllers\TrainingController::class, 'show'])
         ->name('trainings.show');
 
+    Route::delete('/trainings/{training}', [\App\Http\Controllers\TrainingController::class, 'destroy'])
+        ->name('trainings.destroy');
+
     Route::get('/exercises/create', [ExerciseController::class, 'create'])
         ->name('exercises.create');
 

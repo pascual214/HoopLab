@@ -1,9 +1,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import TrainingCard from "@/Components/Training/TrainingCard.vue";
+import ExerciseCard from "@/Components/Training/ExerciseCard.vue";
 
 const props = defineProps({
     trainings: {
+        type: Array,
+        default: () => [],
+    },
+    exercises: {
         type: Array,
         default: () => [],
     },
@@ -55,10 +60,22 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 
         <!-- Contenido -->
         <div class="max-w-4xl mx-auto px-6 py-8">
-            <div v-if="activeTab === 'ejercicios'" class="text-center text-slate-400 py-16">
-                Próximamente — Ejercicios
+            <div v-if="activeTab === 'ejercicios'">
+                <div v-if="exercises.length === 0" class="text-center py-16 text-slate-400">
+                    No tienes ejercicios creados aún.
+                </div>
+                <div v-else class="grid gap-4">
+                    <ExerciseCard
+                        v-for="exercise in exercises"
+                        :key="exercise.id_exercise"
+                        :exercise="exercise"
+                    />
+                </div>
             </div>
             <div v-if="activeTab === 'entrenamientos'">
+                <div v-if="trainings.length === 0" class="text-center py-16 text-slate-400">
+                    No tienes entrenamientos creados aún.
+                </div>
                 <TrainingCard :trainings="trainings" />
             </div>
             <div v-if="activeTab === 'jugadas'" class="text-center text-slate-400 py-16">
