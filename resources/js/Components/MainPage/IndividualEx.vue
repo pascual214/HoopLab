@@ -1,32 +1,45 @@
 <script setup>
 import ExerciseCard from "../Training/ExerciseCard.vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import draggable from "vuedraggable";
 import { usePage } from "@inertiajs/vue3";
 
 const page = usePage();
-const allExercises = ref([...page.props.individualExercises]); // ref local para sortable
+const allExercises = ref([...page.props.individualExercises]);
 
 const props = defineProps({
     filter: {
         type: Object,
-        default: () => ({ filterType: "", filterValue: "" }),
+        default: () => ({ filterType: "", filterValue: "", filterName: "" }),
     },
 });
 
-const exercises = computed(() => {
-    if (!props.filter.filterType || !props.filter.filterValue) {
-        return allExercises.value;
-    }
+const PAGE_SIZE = 10;
+const currentPage = ref(1);
 
+const exercises = computed(() => {
     return allExercises.value.filter((exercise) => {
-        if (props.filter.filterType === "tipo") {
-            return exercise.type === props.filter.filterValue;
-        } else if (props.filter.filterType === "dificultad") {
-            return exercise.difficulty === props.filter.filterValue;
-        }
-        return true;
+        const matchesName = !props.filter.filterName ||
+            exercise.name.toLowerCase().includes(props.filter.filterName.toLowerCase());
+
+        const matchesTypeOrDifficulty =
+            !props.filter.filterType || !props.filter.filterValue ||
+            (props.filter.filterType === "tipo" && exercise.type === props.filter.filterValue) ||
+            (props.filter.filterType === "dificultad" && exercise.difficulty === props.filter.filterValue);
+
+        return matchesName && matchesTypeOrDifficulty;
     });
+});
+
+const totalPages = computed(() => Math.ceil(exercises.value.length / PAGE_SIZE));
+
+const paginatedExercises = computed(() => {
+    const start = (currentPage.value - 1) * PAGE_SIZE;
+    return exercises.value.slice(start, start + PAGE_SIZE);
+});
+
+watch(exercises, () => {
+    currentPage.value = 1;
 });
 </script>
 
@@ -43,7 +56,7 @@ const exercises = computed(() => {
 
         <!-- Lista draggable -->
         <draggable
-            :list="exercises"
+            :list="paginatedExercises"
             :group="{ name: 'exercises', pull: 'clone', put: false }"
             item-key="id_exercise"
             :sort="false"
@@ -56,10 +69,30 @@ const exercises = computed(() => {
             </template>
         </draggable>
 
+        <!-- Paginación -->
+        <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-4">
+            <button
+                @click="currentPage--"
+                :disabled="currentPage === 1"
+                class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+                ‹
+            </button>
+            <span class="text-sm text-gray-500">{{ currentPage }} / {{ totalPages }}</span>
+            <button
+                @click="currentPage++"
+                :disabled="currentPage === totalPages"
+                class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+                ›
+            </button>
+        </div>
+
         <!-- Decoración fondo -->
         <div class="pointer-events-none absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-blue-100/50 blur-2xl"></div>
     </div>
 </template>
+
 <style scoped>
 /* Estilos locales */
 </style>

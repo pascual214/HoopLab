@@ -14,6 +14,7 @@ const props = defineProps({
 
 const filterType = ref("");
 const filterValue = ref("");
+const filterName = ref("");
 
 const difficultyOptions = ["facil", "intermedio", "dificil"];
 
@@ -28,10 +29,10 @@ const filterOptions = computed(() => {
     return [];
 });
 
-// Resetear filtros cuando cambia el modo
 watch(() => props.mode, () => {
     filterType.value = "";
     filterValue.value = "";
+    filterName.value = "";
     emitFilter();
 });
 
@@ -44,22 +45,37 @@ const handleFilterValueChange = () => {
     emitFilter();
 };
 
+const handleFilterNameInput = () => {
+    emitFilter();
+};
+
 const emitFilter = () => {
     emit("filter-change", {
         filterType: filterType.value,
         filterValue: filterValue.value,
+        filterName: filterName.value,
     });
 };
 
 const resetFilters = () => {
     filterType.value = "";
     filterValue.value = "";
+    filterName.value = "";
     emitFilter();
 };
 </script>
 
 <template>
-    <div class="flex gap-2 items-center">
+    <div class="flex gap-2 items-center flex-wrap">
+        <!-- Búsqueda por nombre -->
+        <input
+            type="text"
+            v-model="filterName"
+            @input="handleFilterNameInput"
+            placeholder="Buscar por nombre..."
+            class="px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent border border-gray-400"
+        />
+
         <!-- Primera selección: Tipo o Dificultad -->
         <select
             id="filter-type"
