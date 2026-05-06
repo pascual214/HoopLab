@@ -2,6 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import FullLayout from '@/Layouts/FullLayout.vue';
 import InputError from '@/Components/InputError.vue';
+import CreateHeader from '@/Components/Exercise/CreateHeader.vue';
 
 const form = useForm({
     title: '',
@@ -18,11 +19,7 @@ const submit = () => {
 
 <template>
     <FullLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Crear nuevo ejercicio
-            </h2>
-        </template>
+        <CreateHeader />
 
         <div class="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div class="card bg-base-100 shadow-xl ring-1 ring-slate-200">
