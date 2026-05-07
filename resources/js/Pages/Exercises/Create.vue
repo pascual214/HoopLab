@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import { computed, watch } from "vue";
 import FullLayout from "@/Layouts/FullLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import CreateHeader from "@/Components/Exercise/CreateHeader.vue";
