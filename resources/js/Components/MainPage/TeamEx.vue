@@ -15,7 +15,7 @@ const props = defineProps({
     },
 });
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 10; // Elementos por página
 const currentPage = ref(1);
 
 const exercises = computed(() => {
