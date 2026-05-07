@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import TrainingCard from "@/Components/Training/TrainingCard.vue";
 import ExerciseCard from "@/Components/Training/ExerciseCard.vue";
 import Pagination from "../Shared/Pagination.vue";
@@ -13,6 +13,22 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+});
+
+const PAGE_SIZE = 10; // Elementos por página
+
+const exercisePage = ref(1);
+const totalExercisePages = computed(() => Math.ceil(props.exercises.length / PAGE_SIZE));
+const paginatedExercises = computed(() => {
+    const start = (exercisePage.value - 1) * PAGE_SIZE;
+    return props.exercises.slice(start, start + PAGE_SIZE);
+});
+
+const trainingPage = ref(1);
+const totalTrainingPages = computed(() => Math.ceil(props.trainings.length / PAGE_SIZE));
+const paginatedTrainings = computed(() => {
+    const start = (trainingPage.value - 1) * PAGE_SIZE;
+    return props.trainings.slice(start, start + PAGE_SIZE);
 });
 
 const tabs = ["Ejercicios", "Entrenamientos", "Jugadas"];
@@ -70,15 +86,15 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
                 </div>
                 <div v-else class="grid gap-4">
                     <ExerciseCard
-                        v-for="exercise in exercises"
+                        v-for="exercise in paginatedExercises"
                         :key="exercise.id_exercise"
                         :exercise="exercise"
                     />
                     <Pagination
-                        :currentPage="currentPage"
-                        :totalPages="totalPages"
-                        @prev="currentPage--"
-                        @next="currentPage++"
+                        :currentPage="exercisePage"
+                        :totalPages="totalExercisePages"
+                        @prev="exercisePage--"
+                        @next="exercisePage++"
                     />
                 </div>
             </div>
@@ -89,7 +105,13 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
                 >
                     No tienes entrenamientos creados aún.
                 </div>
-                <TrainingCard :trainings="trainings" />
+                <TrainingCard :trainings="paginatedTrainings" />
+                <Pagination
+                    :currentPage="trainingPage"
+                    :totalPages="totalTrainingPages"
+                    @prev="trainingPage--"
+                    @next="trainingPage++"
+                />
             </div>
             <div
                 v-if="activeTab === 'jugadas'"
