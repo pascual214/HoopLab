@@ -44,4 +44,9 @@ Route::middleware('auth')->group(function () {
 
 Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
+
+Route::get('/board', function () {
+    return Inertia::render('Board/Index');
+})->name('board');
+
 require __DIR__.'/auth.php';
