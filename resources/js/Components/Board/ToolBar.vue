@@ -9,7 +9,7 @@ const addPlayer = (team) => {
 </script>
 
 <template>
-    <div class="flex items-center justify-center gap-4 p-4 bg-white border-t border-gray-200">
+    <div class="flex items-center justify-center gap-4 p-4 bg-white">
         <span class="text-sm font-medium text-gray-500 mr-2">Añadir jugador:</span>
 
         <button

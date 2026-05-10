@@ -1,9 +1,12 @@
 <script setup>
 import { ref } from "vue";
-import BoardTopSection from '@/Components/Board/BoardTopSection.vue';
-import FullCourt from '@/Components/Board/FullCourt.vue';
-import FullLayout from '@/Layouts/FullLayout.vue';
+import FullLayout from "@/Layouts/FullLayout.vue";
+import BoardTopSection from "@/Components/Board/BoardTopSection.vue";
+import FullCourt from "@/Components/Board/FullCourt.vue";
+import HalfCourt from "@/Components/Board/HalfCourt.vue";
 import ToolBar from "@/Components/Board/ToolBar.vue";
+
+const courtMode = ref("full"); // 'full' | 'half'
 
 const players = ref([]);
 const localCount = ref(0);
@@ -16,7 +19,7 @@ const addPlayer = (team) => {
             id: Date.now(),
             team: "local",
             number: localCount.value,
-            x: 0.15 + Math.random() * 0.2,  // proporción 0-1
+            x: 0.15 + Math.random() * 0.2,
             y: 0.3 + Math.random() * 0.4,
         });
     } else {
@@ -36,12 +39,37 @@ const addPlayer = (team) => {
     <FullLayout>
         <BoardTopSection />
 
-        <FullCourt :players="players" />
+        <!-- Toggle pista -->
+        <div class="bg-white sticky top-0 z-20 py-10">
+            <div class="max-full mx-auto flex w-full border-b border-slate-200">
+                <button
+                    @click="courtMode = 'full'"
+                    :class="[
+                        'flex-1 py-4 text-sm font-bold tracking-wide transition-colors border-b-2 text-center',
+                        courtMode === 'full'
+                            ? 'border-slate-800 text-slate-800 bg-slate-100'
+                            : 'border-transparent text-slate-500 hover:text-slate-700',
+                    ]"
+                >
+                    Pista completa
+                </button>
+                <button
+                    @click="courtMode = 'half'"
+                    :class="[
+                        'flex-1 py-4 text-sm font-bold tracking-wide transition-colors border-b-2 text-center',
+                        courtMode === 'half'
+                            ? 'border-slate-800 text-slate-800 bg-slate-100'
+                            : 'border-transparent text-slate-500 hover:text-slate-700',
+                    ]"
+                >
+                    Media pista
+                </button>
+            </div>
+        </div>
+
+        <FullCourt v-if="courtMode === 'full'" :players="players" />
+        <HalfCourt v-else :players="players" />
 
         <ToolBar @add-player="addPlayer" />
     </FullLayout>
 </template>
-
-<style scoped>
-/* Estilos locales */
-</style>
