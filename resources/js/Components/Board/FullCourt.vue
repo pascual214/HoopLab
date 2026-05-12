@@ -166,6 +166,34 @@ const props = defineProps({
                     }"
                 />
 
+                <!-- Línea recta esquina 3pt izquierda (arriba) -->
+                <v-line
+                    :config="{
+                        points: [
+                            50 * scale,
+                            120 * scale,
+                            441 * scale,
+                            120 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt izquierda (abajo) -->
+                <v-line
+                    :config="{
+                        points: [
+                            50 * scale,
+                            1380 * scale,
+                            441 * scale,
+                            1380 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
+                    }"
+                />
+
                 <!-- Arco de tres derecho -->
                 <v-arc
                     :config="{
@@ -177,6 +205,64 @@ const props = defineProps({
                         rotation: 114,
                         stroke: 'white',
                         strokeWidth: 3,
+                        fill: 'transparent',
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt derecha (arriba) -->
+                <v-line
+                    :config="{
+                        points: [
+                            2359 * scale,
+                            120 * scale,
+                            2750 * scale,
+                            120 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt derecha (abajo) -->
+                <v-line
+                    :config="{
+                        points: [
+                            2359 * scale,
+                            1380 * scale,
+                            2750 * scale,
+                            1380 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
+                    }"
+                />
+
+                <!-- Área restringida (no carga) izquierda -->
+                <v-arc
+                    :config="{
+                        x: 160 * scale,
+                        y: 750 * scale,
+                        innerRadius: 0,
+                        outerRadius: 125 * scale,
+                        angle: 180,
+                        rotation: -90,
+                        stroke: 'white',
+                        strokeWidth: 2,
+                        fill: 'transparent',
+                    }"
+                />
+
+                <!-- Área restringida (no carga) derecha -->
+                <v-arc
+                    :config="{
+                        x: 2640 * scale,
+                        y: 750 * scale,
+                        innerRadius: 0,
+                        outerRadius: 125 * scale,
+                        angle: 180,
+                        rotation: 90,
+                        stroke: 'white',
+                        strokeWidth: 2,
                         fill: 'transparent',
                     }"
                 />

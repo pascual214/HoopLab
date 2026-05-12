@@ -102,14 +102,42 @@ defineProps({
                 <v-arc
                     :config="{
                         x: 750 * scale,
-                        y: 1300 * scale,
+                        y: 1210 * scale,
                         innerRadius: 0,
                         outerRadius: 690 * scale,
-                        angle: 152,
-                        rotation: 194,
+                        angle: 132,
+                        rotation: 204,
                         stroke: 'white',
                         strokeWidth: 3,
                         fill: 'transparent',
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt izquierda -->
+                <v-line
+                    :config="{
+                        points: [
+                            120 * scale,
+                            929 * scale,
+                            120 * scale,
+                            1350 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt derecha -->
+                <v-line
+                    :config="{
+                        points: [
+                            1380 * scale,
+                            929 * scale,
+                            1380 * scale,
+                            1350 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
                     }"
                 />
 
@@ -121,6 +149,21 @@ defineProps({
                         width: 180 * scale,
                         height: 10 * scale,
                         fill: 'white',
+                    }"
+                />
+
+                <!-- Área restringida (no carga) -->
+                <v-arc
+                    :config="{
+                        x: 750 * scale,
+                        y: 1210 * scale,
+                        innerRadius: 0,
+                        outerRadius: 125 * scale,
+                        angle: 180,
+                        rotation: 180,
+                        stroke: 'white',
+                        strokeWidth: 2,
+                        fill: 'transparent',
                     }"
                 />
 
