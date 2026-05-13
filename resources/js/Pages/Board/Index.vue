@@ -40,7 +40,7 @@ const addPlayer = (team) => {
         <BoardTopSection />
 
         <!-- Toggle pista -->
-        <div class="bg-white sticky top-0 z-20 py-10">
+        <div class="bg-white sticky top-0 z-20 pt-10">
             <div class="max-full mx-auto flex w-full border-b border-slate-200">
                 <button
                     @click="courtMode = 'full'"
@@ -67,8 +67,8 @@ const addPlayer = (team) => {
             </div>
         </div>
 
-        <FullCourt v-if="courtMode === 'full'" :players="players" />
-        <HalfCourt v-else :players="players" />
+        <FullCourt v-if="courtMode === 'full'" :players="players" class="pt-10"/>
+        <HalfCourt v-else :players="players" class="pt-10"/>
 
         <ToolBar @add-player="addPlayer" />
     </FullLayout>

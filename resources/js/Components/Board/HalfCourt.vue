@@ -31,6 +31,17 @@ defineProps({
         default: () => [],
     },
 });
+
+// Quitar unión en las semicircunferencias
+const describeArc = (x, y, radius, startAngle, endAngle) => {
+    const toRad = (deg) => (deg * Math.PI) / 180;
+    const x1 = x + radius * Math.cos(toRad(startAngle));
+    const y1 = y + radius * Math.sin(toRad(startAngle));
+    const x2 = x + radius * Math.cos(toRad(endAngle));
+    const y2 = y + radius * Math.sin(toRad(endAngle));
+    const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+    return `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`;
+};
 </script>
 
 <template>
@@ -40,10 +51,11 @@ defineProps({
                 <!-- Suelo -->
                 <v-rect
                     :config="{
-                        x: 0, y: 0,
+                        x: 0,
+                        y: 0,
                         width: stageWidth,
                         height: stageHeight,
-                        fill: '#C68642',
+                        fill: '#E8A84A',
                     }"
                 />
 
@@ -63,7 +75,12 @@ defineProps({
                 <!-- Línea de medio campo (arriba, discontinua) -->
                 <v-line
                     :config="{
-                        points: [50 * scale, 50 * scale, 1450 * scale, 50 * scale],
+                        points: [
+                            50 * scale,
+                            50 * scale,
+                            1450 * scale,
+                            50 * scale,
+                        ],
                         stroke: 'white',
                         strokeWidth: 3,
                         dash: [10, 8],
@@ -79,18 +96,18 @@ defineProps({
                         height: 580 * scale,
                         stroke: 'white',
                         strokeWidth: 3,
-                        fill: '#A0522D55',
+                        fill: '#B8712A',
                     }"
                 />
 
-                <!-- Semicírculo tiros libres (encima de la zona) -->
+                <!-- Círculo tiros libres (encima de la zona) -->
                 <v-arc
                     :config="{
                         x: 750 * scale,
                         y: 770 * scale,
                         innerRadius: 0,
                         outerRadius: 180 * scale,
-                        angle: 180,
+                        angle: 360,
                         rotation: 180,
                         stroke: 'white',
                         strokeWidth: 3,
@@ -99,17 +116,62 @@ defineProps({
                 />
 
                 <!-- Arco de tres -->
-                <v-arc
+                <v-path
                     :config="{
-                        x: 750 * scale,
-                        y: 1300 * scale,
-                        innerRadius: 0,
-                        outerRadius: 690 * scale,
-                        angle: 152,
-                        rotation: 194,
+                        data: describeArc(
+                            750 * scale,
+                            1210 * scale,
+                            690 * scale,
+                            204,
+                            336,
+                        ),
                         stroke: 'white',
                         strokeWidth: 3,
                         fill: 'transparent',
+                    }"
+                />
+
+                <!-- Área restringida (no carga) -->
+                <v-path
+                    :config="{
+                        data: describeArc(
+                            750 * scale,
+                            1210 * scale,
+                            125 * scale,
+                            180,
+                            360,
+                        ),
+                        stroke: 'white',
+                        strokeWidth: 2,
+                        fill: 'transparent',
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt izquierda -->
+                <v-line
+                    :config="{
+                        points: [
+                            120 * scale,
+                            929 * scale,
+                            120 * scale,
+                            1350 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
+                    }"
+                />
+
+                <!-- Línea recta esquina 3pt derecha -->
+                <v-line
+                    :config="{
+                        points: [
+                            1380 * scale,
+                            929 * scale,
+                            1380 * scale,
+                            1350 * scale,
+                        ],
+                        stroke: 'white',
+                        strokeWidth: 3,
                     }"
                 />
 
@@ -128,10 +190,10 @@ defineProps({
                 <v-circle
                     :config="{
                         x: 750 * scale,
-                        y: 1210 * scale,
-                        radius: 45 * scale,
+                        y: 1220 * scale,
+                        radius: 30 * scale,
                         stroke: 'white',
-                        strokeWidth: 3,
+                        strokeWidth: 2,
                         fill: 'transparent',
                     }"
                 />
@@ -148,9 +210,11 @@ defineProps({
                 >
                     <v-circle
                         :config="{
-                            x: 0, y: 0,
+                            x: 0,
+                            y: 0,
                             radius: 40 * scale,
-                            fill: player.team === 'local' ? '#3B82F6' : '#EF4444',
+                            fill:
+                                player.team === 'local' ? '#3B82F6' : '#EF4444',
                         }"
                     />
                     <v-text
