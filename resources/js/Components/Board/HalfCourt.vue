@@ -212,17 +212,20 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
                         :config="{
                             x: 0,
                             y: 0,
-                            radius: 40 * scale,
+                            radius: 16,
                             fill:
                                 player.team === 'local' ? '#3B82F6' : '#EF4444',
+                            stroke:
+                                player.team === 'local' ? '#1D4ED8' : '#B91C1C',
+                            strokeWidth: 3,
                         }"
                     />
                     <v-text
                         :config="{
-                            x: -8 * scale,
-                            y: -15 * scale,
+                            x: -6 * scale,
+                            y: -12 * scale,
                             text: String(player.number),
-                            fontSize: 30 * scale,
+                            fontSize: 14,
                             fill: 'white',
                             fontStyle: 'bold',
                         }"

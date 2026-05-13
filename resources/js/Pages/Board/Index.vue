@@ -76,6 +76,6 @@ const clearBoard = () => {
         <FullCourt v-if="courtMode === 'full'" :players="players" class="pt-10"/>
         <HalfCourt v-else :players="players" class="pt-10"/>
 
-        <ToolBar @add-player="addPlayer" @clear-board="clearBoard" />
+        <ToolBar @add-player="addPlayer" @clear-board="clearBoard" :local-count="localCount" :visitor-count="visitorCount" />
     </FullLayout>
 </template>
