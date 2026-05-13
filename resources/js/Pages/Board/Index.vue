@@ -33,6 +33,12 @@ const addPlayer = (team) => {
         });
     }
 };
+
+const clearBoard = () => {
+    players.value = [];
+    localCount.value = 0;
+    visitorCount.value = 0;
+};
 </script>
 
 <template>
@@ -70,6 +76,6 @@ const addPlayer = (team) => {
         <FullCourt v-if="courtMode === 'full'" :players="players" class="pt-10"/>
         <HalfCourt v-else :players="players" class="pt-10"/>
 
-        <ToolBar @add-player="addPlayer" />
+        <ToolBar @add-player="addPlayer" @clear-board="clearBoard" />
     </FullLayout>
 </template>
