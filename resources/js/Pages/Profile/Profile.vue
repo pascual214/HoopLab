@@ -108,7 +108,7 @@ function handleFileChange(e) {
                             {{ user.name }}
                         </h2>
                         <p class="text-sm font-semibold text-slate-600">
-                            Cuenta: {{ user.role ?? "entrenador" }}
+                            Cuenta: {{ user.rol ?? "entrenador" }}
                         </p>
                     </div>
                 </div>

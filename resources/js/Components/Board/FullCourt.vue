@@ -33,6 +33,17 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+// Quitar unión en las semicircunferencias
+const describeArc = (x, y, radius, startAngle, endAngle) => {
+    const toRad = (deg) => (deg * Math.PI) / 180;
+    const x1 = x + radius * Math.cos(toRad(startAngle));
+    const y1 = y + radius * Math.sin(toRad(startAngle));
+    const x2 = x + radius * Math.cos(toRad(endAngle));
+    const y2 = y + radius * Math.sin(toRad(endAngle));
+    const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+    return `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`;
+};
 </script>
 
 <template>
@@ -51,7 +62,7 @@ const props = defineProps({
                         y: 0,
                         width: stageWidth,
                         height: stageHeight,
-                        fill: '#C68642',
+                        fill: '#E8A84A',
                     }"
                 />
 
@@ -104,7 +115,7 @@ const props = defineProps({
                         height: 650 * scale,
                         stroke: 'white',
                         strokeWidth: 3,
-                        fill: '#A0522D55',
+                        fill: '#B8712A',
                     }"
                 />
 
@@ -117,18 +128,18 @@ const props = defineProps({
                         height: 650 * scale,
                         stroke: 'white',
                         strokeWidth: 3,
-                        fill: '#A0522D55',
+                        fill: '#B8712A',
                     }"
                 />
 
-                <!-- Semicírculo tiros libres izquierdo -->
+                <!-- Círculo tiros libres izquierdo -->
                 <v-arc
                     :config="{
                         x: 630 * scale,
                         y: 750 * scale,
                         innerRadius: 0,
                         outerRadius: 180 * scale,
-                        angle: 180,
+                        angle: 360,
                         rotation: -90,
                         stroke: 'white',
                         strokeWidth: 3,
@@ -136,14 +147,14 @@ const props = defineProps({
                     }"
                 />
 
-                <!-- Semicírculo tiros libres derecho -->
+                <!-- Círculo tiros libres derecho -->
                 <v-arc
                     :config="{
                         x: 2170 * scale,
                         y: 750 * scale,
                         innerRadius: 0,
                         outerRadius: 180 * scale,
-                        angle: 180,
+                        angle: 360,
                         rotation: 90,
                         stroke: 'white',
                         strokeWidth: 3,
@@ -152,14 +163,15 @@ const props = defineProps({
                 />
 
                 <!-- Arco de tres izquierdo -->
-                <v-arc
+                <v-path
                     :config="{
-                        x: 160 * scale,
-                        y: 750 * scale,
-                        innerRadius: 0,
-                        outerRadius: 690 * scale,
-                        angle: 132,
-                        rotation: -66,
+                        data: describeArc(
+                            160 * scale,
+                            750 * scale,
+                            690 * scale,
+                            -66,
+                            66,
+                        ),
                         stroke: 'white',
                         strokeWidth: 3,
                         fill: 'transparent',
@@ -195,14 +207,15 @@ const props = defineProps({
                 />
 
                 <!-- Arco de tres derecho -->
-                <v-arc
+                <v-path
                     :config="{
-                        x: 2640 * scale,
-                        y: 750 * scale,
-                        innerRadius: 0,
-                        outerRadius: 690 * scale,
-                        angle: 132,
-                        rotation: 114,
+                        data: describeArc(
+                            2640 * scale,
+                            750 * scale,
+                            690 * scale,
+                            114,
+                            246,
+                        ),
                         stroke: 'white',
                         strokeWidth: 3,
                         fill: 'transparent',
@@ -238,14 +251,15 @@ const props = defineProps({
                 />
 
                 <!-- Área restringida (no carga) izquierda -->
-                <v-arc
+                <v-path
                     :config="{
-                        x: 160 * scale,
-                        y: 750 * scale,
-                        innerRadius: 0,
-                        outerRadius: 125 * scale,
-                        angle: 180,
-                        rotation: -90,
+                        data: describeArc(
+                            160 * scale,
+                            750 * scale,
+                            125 * scale,
+                            270,
+                            90,
+                        ),
                         stroke: 'white',
                         strokeWidth: 2,
                         fill: 'transparent',
@@ -253,14 +267,15 @@ const props = defineProps({
                 />
 
                 <!-- Área restringida (no carga) derecha -->
-                <v-arc
+                <v-path
                     :config="{
-                        x: 2640 * scale,
-                        y: 750 * scale,
-                        innerRadius: 0,
-                        outerRadius: 125 * scale,
-                        angle: 180,
-                        rotation: 90,
+                        data: describeArc(
+                            2640 * scale,
+                            750 * scale,
+                            125 * scale,
+                            90,
+                            270,
+                        ),
                         stroke: 'white',
                         strokeWidth: 2,
                         fill: 'transparent',
@@ -270,11 +285,11 @@ const props = defineProps({
                 <!-- Aro izquierdo -->
                 <v-circle
                     :config="{
-                        x: 160 * scale,
+                        x: 140 * scale,
                         y: 750 * scale,
-                        radius: 45 * scale,
+                        radius: 30 * scale,
                         stroke: 'white',
-                        strokeWidth: 3,
+                        strokeWidth: 2,
                         fill: 'transparent',
                     }"
                 />
@@ -293,11 +308,11 @@ const props = defineProps({
                 <!-- Aro derecho -->
                 <v-circle
                     :config="{
-                        x: 2640 * scale,
+                        x: 2660 * scale,
                         y: 750 * scale,
-                        radius: 45 * scale,
+                        radius: 30 * scale,
                         stroke: 'white',
-                        strokeWidth: 3,
+                        strokeWidth: 2,
                         fill: 'transparent',
                     }"
                 />
