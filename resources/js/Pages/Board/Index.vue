@@ -12,6 +12,7 @@ const players = ref([]);
 const localCount = ref(0);
 const visitorCount = ref(0);
 
+const history = ref([]); // pila de acciones para deshacer
 const lines = ref([]);
 const activeTool = ref(null);
 
@@ -34,6 +35,17 @@ const addPlayer = (team) => {
             x: 0.65 + Math.random() * 0.2,
             y: 0.3 + Math.random() * 0.4,
         });
+    }
+    history.value.push({ type: "player", team });
+};
+
+const undo = () => {
+    const last = history.value.pop();
+    if (!last) return;
+    if (last.type === "player") {
+        players.value.pop();
+        if (last.team === "local") localCount.value--;
+        else visitorCount.value--;
     }
 };
 
@@ -104,6 +116,8 @@ const clearBoard = () => {
 
         <ToolBar
             @add-player="addPlayer"
+            @undo="undo"
+            :can-undo="history.length > 0"
             @clear-board="clearBoard"
             @set-tool="setTool"
             :local-count="localCount"
