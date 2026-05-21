@@ -13,6 +13,8 @@ const localCount = ref(0);
 const visitorCount = ref(0);
 
 const history = ref([]); // pila de acciones para deshacer
+const lines = ref([]);
+const activeTool = ref(null);
 
 const addPlayer = (team) => {
     if (team === "local") {
@@ -45,6 +47,21 @@ const undo = () => {
         if (last.team === "local") localCount.value--;
         else visitorCount.value--;
     }
+};
+
+const addLine = (line) => {
+    lines.value.push(line);
+};
+
+const setTool = (tool) => {
+    activeTool.value = tool;
+};
+
+const clearBoard = () => {
+    players.value = [];
+    lines.value = [];
+    localCount.value = 0;
+    visitorCount.value = 0;
 };
 </script>
 
@@ -80,13 +97,32 @@ const undo = () => {
             </div>
         </div>
 
-        <FullCourt v-if="courtMode === 'full'" :players="players" class="pt-10"/>
-        <HalfCourt v-else :players="players" class="pt-10"/>
+        <FullCourt
+            v-if="courtMode === 'full'"
+            :players="players"
+            :lines="lines"
+            :active-tool="activeTool"
+            @add-line="addLine"
+            class="pt-10"
+        />
+        <HalfCourt
+            v-else
+            :players="players"
+            :lines="lines"
+            :active-tool="activeTool"
+            @add-line="addLine"
+            class="pt-10"
+        />
 
         <ToolBar
             @add-player="addPlayer"
             @undo="undo"
             :can-undo="history.length > 0"
+            @clear-board="clearBoard"
+            @set-tool="setTool"
+            :local-count="localCount"
+            :visitor-count="visitorCount"
+            :active-tool="activeTool"
         />
     </FullLayout>
 </template>
