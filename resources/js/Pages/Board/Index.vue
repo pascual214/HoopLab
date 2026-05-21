@@ -62,6 +62,7 @@ const clearBoard = () => {
     lines.value = [];
     localCount.value = 0;
     visitorCount.value = 0;
+    history.value = [];
 };
 </script>
 
