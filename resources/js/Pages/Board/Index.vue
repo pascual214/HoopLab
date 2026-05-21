@@ -12,6 +12,9 @@ const players = ref([]);
 const localCount = ref(0);
 const visitorCount = ref(0);
 
+const lines = ref([]);
+const activeTool = ref(null);
+
 const addPlayer = (team) => {
     if (team === "local") {
         localCount.value++;
@@ -34,8 +37,17 @@ const addPlayer = (team) => {
     }
 };
 
+const addLine = (line) => {
+    lines.value.push(line);
+};
+
+const setTool = (tool) => {
+    activeTool.value = tool;
+};
+
 const clearBoard = () => {
     players.value = [];
+    lines.value = [];
     localCount.value = 0;
     visitorCount.value = 0;
 };
@@ -73,9 +85,30 @@ const clearBoard = () => {
             </div>
         </div>
 
-        <FullCourt v-if="courtMode === 'full'" :players="players" class="pt-10"/>
-        <HalfCourt v-else :players="players" class="pt-10"/>
+        <FullCourt
+            v-if="courtMode === 'full'"
+            :players="players"
+            :lines="lines"
+            :active-tool="activeTool"
+            @add-line="addLine"
+            class="pt-10"
+        />
+        <HalfCourt
+            v-else
+            :players="players"
+            :lines="lines"
+            :active-tool="activeTool"
+            @add-line="addLine"
+            class="pt-10"
+        />
 
-        <ToolBar @add-player="addPlayer" @clear-board="clearBoard" :local-count="localCount" :visitor-count="visitorCount" />
+        <ToolBar
+            @add-player="addPlayer"
+            @clear-board="clearBoard"
+            @set-tool="setTool"
+            :local-count="localCount"
+            :visitor-count="visitorCount"
+            :active-tool="activeTool"
+        />
     </FullLayout>
 </template>

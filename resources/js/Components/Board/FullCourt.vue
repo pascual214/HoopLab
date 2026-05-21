@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
+const emit = defineEmits(["add-line"]);
+
 const containerRef = ref(null);
 const containerWidth = ref(800);
 
@@ -32,6 +34,14 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    lines: {
+        type: Array,
+        default: () => [],
+    },
+    activeTool: {
+        type: String,
+        default: null,
+    },
 });
 
 // Quitar unión en las semicircunferencias
@@ -44,15 +54,138 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
     const largeArc = endAngle - startAngle > 180 ? 1 : 0;
     return `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`;
 };
+
+// --- Lógica de dibujo ---
+
+const isDrawing = ref(false);
+const drawStart = ref({ x: 0, y: 0 });
+const previewEnd = ref({ x: 0, y: 0 });
+
+const getStagePos = (e) => {
+    const stage = e.target.getStage();
+    const pos = stage.getPointerPosition();
+    return {
+        x: pos.x / stageWidth.value,
+        y: pos.y / stageHeight.value,
+    };
+};
+
+const handleMouseDown = (e) => {
+    if (!props.activeTool) return;
+    const pos = getStagePos(e);
+    isDrawing.value = true;
+    drawStart.value = pos;
+    previewEnd.value = pos;
+};
+
+const handleMouseMove = (e) => {
+    if (!isDrawing.value) return;
+    previewEnd.value = getStagePos(e);
+};
+
+const handleMouseUp = (e) => {
+    if (!isDrawing.value) return;
+    isDrawing.value = false;
+    const pos = getStagePos(e);
+    const dx = pos.x - drawStart.value.x;
+    const dy = pos.y - drawStart.value.y;
+    if (Math.sqrt(dx * dx + dy * dy) > 0.01) {
+        emit("add-line", {
+            id: Date.now(),
+            type: props.activeTool.replace("line-", ""),
+            x1: drawStart.value.x,
+            y1: drawStart.value.y,
+            x2: pos.x,
+            y2: pos.y,
+        });
+    }
+};
+
+const handleMouseLeave = () => {
+    isDrawing.value = false;
+};
+
+// --- Helpers para renderizar líneas ---
+
+const getLineConfig = (line) => {
+    const config = {
+        points: [
+            line.x1 * stageWidth.value,
+            line.y1 * stageHeight.value,
+            line.x2 * stageWidth.value,
+            line.y2 * stageHeight.value,
+        ],
+        stroke: "#111",
+        strokeWidth: 3,
+        lineCap: "round",
+    };
+    if (line.type === "dashed") {
+        config.dash = [15, 8];
+    }
+    return config;
+};
+
+const getArrowConfig = (line) => ({
+    points: [
+        line.x1 * stageWidth.value,
+        line.y1 * stageHeight.value,
+        line.x2 * stageWidth.value,
+        line.y2 * stageHeight.value,
+    ],
+    stroke: "#111",
+    fill: "#111",
+    strokeWidth: 3,
+    pointerLength: 12,
+    pointerWidth: 10,
+});
+
+const getBlockEndConfig = (line) => {
+    const x2 = line.x2 * stageWidth.value;
+    const y2 = line.y2 * stageHeight.value;
+    const dx = x2 - line.x1 * stageWidth.value;
+    const dy = y2 - line.y1 * stageHeight.value;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    if (len < 1) return { points: [0, 0, 0, 0], stroke: "transparent" };
+    const px = (-dy / len) * 18;
+    const py = (dx / len) * 18;
+    return {
+        points: [x2 - px, y2 - py, x2 + px, y2 + py],
+        stroke: "#111",
+        strokeWidth: 3,
+        lineCap: "round",
+    };
+};
+
+const previewConfig = computed(() => ({
+    points: [
+        drawStart.value.x * stageWidth.value,
+        drawStart.value.y * stageHeight.value,
+        previewEnd.value.x * stageWidth.value,
+        previewEnd.value.y * stageHeight.value,
+    ],
+    stroke: "#111",
+    strokeWidth: 2,
+    dash: [8, 4],
+    opacity: 0.5,
+    lineCap: "round",
+}));
 </script>
 
 <template>
-    <div ref="containerRef" style="width: 70%; margin: 0 auto">
+    <div
+        ref="containerRef"
+        :style="{
+            width: '70%',
+            margin: '0 auto',
+            cursor: activeTool ? 'crosshair' : 'default',
+        }"
+    >
         <v-stage
-            :config="{
-                width: stageWidth,
-                height: stageHeight,
-            }"
+            :config="{ width: stageWidth, height: stageHeight }"
+            @mousedown="handleMouseDown"
+            @mousemove="handleMouseMove"
+            @mouseup="handleMouseUp"
+            @mouseleave="handleMouseLeave"
         >
             <v-layer>
                 <!-- Suelo de la pista -->
@@ -328,6 +461,25 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
                     }"
                 />
 
+                <!-- Líneas dibujadas por el usuario -->
+                <template v-for="line in lines" :key="line.id">
+                    <v-arrow
+                        v-if="line.type === 'arrow'"
+                        :config="getArrowConfig(line)"
+                    />
+                    <v-line
+                        v-if="line.type !== 'arrow'"
+                        :config="getLineConfig(line)"
+                    />
+                    <v-line
+                        v-if="line.type === 'block'"
+                        :config="getBlockEndConfig(line)"
+                    />
+                </template>
+
+                <!-- Preview mientras se dibuja -->
+                <v-line v-if="isDrawing" :config="previewConfig" />
+
                 <!-- Jugadores -->
                 <v-group
                     v-for="player in players"
@@ -335,7 +487,7 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
                     :config="{
                         x: player.x * stageWidth,
                         y: player.y * stageHeight,
-                        draggable: true,
+                        draggable: !activeTool,
                     }"
                 >
                     <v-circle
@@ -365,6 +517,7 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
         </v-stage>
     </div>
 </template>
+
 <style scoped>
 canvas {
     display: block;
